@@ -1,0 +1,7 @@
+﻿  main.c
+C:\Users\user\Desktop\새 폴더\Adventure_of_Wizard\Adventure_of_Wizard\main.c(2935,24): warning C4047: '=': 'char'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+C:\Users\user\Desktop\새 폴더\Adventure_of_Wizard\Adventure_of_Wizard\main.c(2985,24): warning C4047: '=': 'char'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+C:\Users\user\Desktop\새 폴더\Adventure_of_Wizard\Adventure_of_Wizard\main.c(3177,17): warning C4013: 'clrscr'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\user\Desktop\새 폴더\Adventure_of_Wizard\Adventure_of_Wizard\main.c(2179,1): warning C4715: 'level_up': 모든 제어 경로에서 값을 반환하지는 않습니다.
+main.obj : error LNK2019: _clrscr_main 함수에서 참조되는 확인할 수 없는 외부 기호
+C:\Users\user\Desktop\새 폴더\Adventure_of_Wizard\Debug\Adventure_of_Wizard.exe : fatal error LNK1120: 1개의 확인할 수 없는 외부 참조입니다.
