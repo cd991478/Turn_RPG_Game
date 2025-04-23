@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/eb998c46-1c99-4afb-9bb7-a24a49d3b90c)### - 프로젝트명
+### - 프로젝트명
 - 턴제 전투방식 RPG 게임 - 마법사의 모험
 
 ### - 개발 환경
