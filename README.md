@@ -532,7 +532,7 @@ void skill1_eft()   // 플레이어 스킬 1 파이어볼 이펙트 재생
 
 #### 6. 컴퓨터 턴
 
-
+![Image](https://github.com/user-attachments/assets/e13095c1-af9a-4882-84d3-ac81c436f81c)
 
 - 플레이어 차례가 끝나면, 컴퓨터는 바로 스킬을 사용합니다.
 - 컴퓨터는 4가지 스킬중 1가지를 랜덤으로 사용합니다. 사용 확률은 각각 25%로 모두 동일합니다.
@@ -584,65 +584,97 @@ if(choose == 0x31){
 ```
 
 ```c
-void stage01_skill() // 스테이지 1 컴퓨터 스킬
+void stage06_skill() // 스테이지 6 컴퓨터 스킬
 {
-    int r1;
-    randomize();
-    r1 = random(40) + 11; // 총기 난사 스킬 데미지를 랜덤하게 적용
-
     if (com_skill == 0) { // com_skill 은 랜덤 25%
-        printf("적이 <조준 사격>을 사용 했습니다.\n");
+        printf("적이 <열기 분사>를 사용 했습니다.\n");
         d1s();
-        gunshot_eft(); // 총알 날라가는 이펙트 적용
-        gunshot_eft(); 
-        gunshot_eft();
+        fireshot_eft();
         d1s();
-        player_demage(30); // 플레이어에게 피해량 적용 및 문구 출력
+        player_mplose(com_att + 20);
         d1s();
     }
     if (com_skill == 1) {
-        printf("적이 <총기 난사>를 사용 했습니다.\n");
+        printf("적이 <발열>을 사용 했습니다.\n");
         d1s();
-        gunshot_eft2();
-        gunshot_eft2();
-        gunshot_eft2();
-        gunshot_eft2();
-        gunshot_eft2();
+        warmup_eft();
         d1s();
-        player_demage(r1); // 랜덤 데미지 적용
+        com_hpup(25);
+        d1s();
+        com_attup(10);
+        d1s();
+        com_defup(5);
         d1s();
     }
     if (com_skill == 2) {
-        printf("적이 <수류탄 투척>을 사용 했습니다.\n");
+        printf("적이 <화염 주먹>을 사용 했습니다.\n");
         d1s();
-        boom_eft();         // 수류탄 투척 이펙트
+        firepunch_eft(); // 화염 주먹 이펙트 재생
         d1s();
-        player_demage(35);  // 피해량 적용 및 문구 출력
+        player_demage(com_att + 15); // 플레이어 피해량 적용, 출력
         d1s();
-        player_defdown(5);  // 방어력 감소 효과 적용 및 문구 출력
+        player_defdown(5); // 플레이어 방어력 감소 효과 적용, 출력
         d1s();
     }
     if (com_skill == 3) {
-        printf("적이 <응급 치료>를 사용 했습니다.\n");
+        printf("적이 <폭류 화염>을 사용 했습니다.\n");
         d1s();
-        comhp_eft();        // 컴퓨터 체력 회복 이펙트
+        fireblast_eft();
         d1s();
-        com_hpup(30);       // 컴퓨터 체력 회복 적용 및 문구 출력
+        player_demage(com_att + 20);
         d1s();
     }
 }
 
-void gunshot_eft() // 컴퓨터 스킬 조준 사격 이펙트
+void firepunch_eft() // 컴퓨터 스킬 화염주먹강타 스킬
 {
     int k;
-    for (k = 48; k > 21; k--) // 좌측으로 총알이 날라가는 효과
+    move_eft(); // 컴퓨터가 플레이어 앞으로 달려옴
+    
+    for (k = 0; k < 4; k++) // 바로앞에서 주먹을 날려서 때리는 효과 + 맞고 불타는 효과 반복
     {
-        gotoxy(k, 16);
-        puts("-");
-        delay(10);
-        gotoxy(k, 16);
-        puts(" "); 
+        textcolor(ORANGE);
+        gotoxy(26, 16);     // 주먹 날리는 효과
+        puts("◎");         
+        delay(50);          //　옷　　◎옷
+        move_set();
+        textcolor(ORANGE);
+        gotoxy(24, 16);     //　옷　◎　옷
+        puts("◎");
+        delay(50);          //　옷◎　　옷
+        move_set();
+        textcolor(ORANGE);
+        gotoxy(22, 16);
+        puts("◎");
+        delay(50);
+        move_set();
+        textcolor(LIGHTRED);
+        gotoxy(18, 17);      // 피격 당하는 효과
+        puts("♨");          // 아래에서 위로 열기가 올라감
+        gotoxy(20, 17);      //　옷　　　옷
+        puts("♨");          //♨♨♨
+        gotoxy(22, 17);
+        puts("♨");          //♨옷♨　　옷
+        delay(20);          
+        move_set();          //♨♨♨
+        textcolor(LIGHTRED); //　옷　　　옷
+        gotoxy(18, 16);      
+        puts("♨");
+        gotoxy(22, 16);
+        puts("♨");
+        delay(20);
+        move_set();
+        textcolor(LIGHTRED);
+        gotoxy(18, 15);
+        puts("♨");
+        gotoxy(20, 15);
+        puts("♨");
+        gotoxy(22, 15);
+        puts("♨");
+        delay(50);
+        move_set();
     }
+    back_eft();
     eft_set();
 }
 ```
@@ -788,7 +820,85 @@ if (player_hp <= 0) // 플레이어 체력 체크
 
 ---
 
-#### 9. 레벨업
+#### 9. 점점 올라가는 난이도와 다양한 스킬
+
+![Image](https://github.com/user-attachments/assets/676b2dfb-eac1-4b23-a9a5-c0b6010f4681)
+![Image](https://github.com/user-attachments/assets/7615766e-4e23-429c-9fe1-256c8f42dd9f)
+
+- 다시 메인 메뉴에서 전투를 선택하여, 더 높은 스테이지에 도전 할 수 있습니다.
+- 스테이지가 높아질때마다 컴퓨터의 체력, 공격력 능력치가 점점 더 높아지며 난이도가 올라갑니다.
+- 그리고 기절, 출혈 등의 상태 이상 스킬이나, 마나 흡수, 버프, 디버프, 방어력 무시, 치명타 효과를 가진 컴퓨터의 스킬들도 등장합니다.
+
+```c
+void powerthunder_eft() // 컴퓨터 스킬 심판의 번개 이펙트
+{
+    int k;
+    int t;
+    for (t = 0; t < 10; t++)  // 번개 줄기가 출렁이며 플레이어가 감전 당하는 효과
+    {
+        for (k = 48; k > 21; k = k - 2) // 번개 줄기 MMM 형태 출력
+        {
+            textcolor(YELLOW);
+            gotoxy(k, 16);              // ／＼／＼／＼／＼／＼
+            puts("／");
+            gotoxy(k - 2, 16);
+            puts("＼");
+            k = k - 2;
+        }
+        gotoxy(20, 15);     // 플레이어 감전 이펙트 1 (+ 형태)
+        puts("│");
+        gotoxy(22, 16);    //   │
+        puts("──");       //  ㅡ옷ㅡ
+        gotoxy(20, 17);    //   │
+        puts("│");
+        gotoxy(18, 16);
+        puts("──");
+        delay(50);
+        char_set();         // 모두 지움
+
+        for (k = 48; k > 21; k = k - 2) // 번개줄기 WWW형태 출력
+        {
+            textcolor(YELLOW);
+            gotoxy(k, 16);              // ＼／＼／＼／＼／＼／
+            puts("＼");
+            gotoxy(k - 2, 16);
+            puts("／");
+            k = k - 2;
+        }
+        gotoxy(22, 15);     // 플레이어 감전 이펙트 2 (x 형태)
+        puts("／");
+        gotoxy(22, 17);     // ＼   ／
+        puts("＼");         //    옷
+        gotoxy(18, 17);     //  ／   ＼
+        puts("／");
+        gotoxy(18, 15);
+        puts("＼");
+        delay(50);
+        char_set();         // 모두 지움
+    }
+    eft_set();
+}
+void stage05_skill()
+{
+    if (com_skill == 0) {...}
+    if (com_skill == 1) {...}
+    if (com_skill == 2) {...}
+    if (com_skill == 3) {
+        printf("적이 <심판의 번개>를 사용 했습니다.\n");
+        d1s();
+        powerthunder_eft(); // 이펙트 재생
+        d1s();
+        printf("방어력을 무시하여 피해를 입힙니다\n");
+        d1s();
+        player_demage(com_att + 10 + player_def + player_defup); // 플레이어 방어력만큼 데미지를 더해 방어력 무시 효과
+        d1s();
+    }
+}
+
+```
+
+---
+#### 10. 레벨업
 
 ![9](./images/6.png)
 
@@ -817,7 +927,7 @@ void level_up(int a) // 전투 종료 후 레벨업했는지 체크
 
 ---
 
-#### 10. 스탯 메뉴
+#### 11. 스탯 메뉴
 
 ![a](./images/7r.png)
 ![b](./images/8r.png)
@@ -934,7 +1044,7 @@ void statchoose(int a) // 선택한 스탯 번호에 따라 스탯 강화
 ```
 ---
 
-#### 11. 스킬 메뉴
+#### 12. 스킬 메뉴
 
 ![s](./images/10.png)
 ![a](./images/11.png)
@@ -1007,7 +1117,7 @@ if (choose == 0x33 && player_skillpoint == 0) {
 
 ---
 
-#### 12. 무기 상점
+#### 13. 무기 상점
 
 ![a](./images/12.png)
 ![a](./images/13.png)
@@ -1080,7 +1190,9 @@ if (choose == 0x34) {
 
 ---
 
-#### 13. 랭크 시스템
+
+
+#### 14. 랭크 시스템
 
 ![14](./images/14.png)
 ![15](./images/15.png)
@@ -1128,7 +1240,7 @@ if (total >= 3) // 충분히 전투를 치뤄 등급이 배정 된경우
 
 ---
 
-#### 14. 치트키 시스템
+#### 15. 치트키 시스템
 
 ![a](./images/16.png)
 
@@ -1177,7 +1289,7 @@ if (choose == 0x35)
 
 ---
 
-#### 15. 텍스트 속도 설정
+#### 16. 텍스트 속도 설정
 
 ![a](./images/17.png)
 
@@ -1226,3 +1338,4 @@ if (choose == 0x36)
 ```
 
 ---
+
