@@ -1,6 +1,5 @@
 ﻿  main.c
-C:\Users\user\Desktop\새 폴더\Adventure_of_Wizard\Adventure_of_Wizard\main.c(2661,5): warning C4013: '_getch'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-C:\Users\user\Desktop\새 폴더\Adventure_of_Wizard\Adventure_of_Wizard\main.c(2945,24): warning C4047: '=': 'char'의 간접 참조 수준이 'void *'과(와) 다릅니다.
-C:\Users\user\Desktop\새 폴더\Adventure_of_Wizard\Adventure_of_Wizard\main.c(2995,24): warning C4047: '=': 'char'의 간접 참조 수준이 'void *'과(와) 다릅니다.
-C:\Users\user\Desktop\새 폴더\Adventure_of_Wizard\Adventure_of_Wizard\main.c(2188,1): warning C4715: 'level_up': 모든 제어 경로에서 값을 반환하지는 않습니다.
-  Adventure_of_Wizard.vcxproj -> C:\Users\user\Desktop\새 폴더\Adventure_of_Wizard\x64\Debug\Adventure_of_Wizard.exe
+E:\프로젝트\C 프로젝트 RPG 게임\Adventure_of_Wizard\Adventure_of_Wizard\main.c(2773,5): warning C4013: '_getch'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+E:\프로젝트\C 프로젝트 RPG 게임\Adventure_of_Wizard\Adventure_of_Wizard\main.c(3089,24): warning C4047: '=': 'char'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+E:\프로젝트\C 프로젝트 RPG 게임\Adventure_of_Wizard\Adventure_of_Wizard\main.c(3150,24): warning C4047: '=': 'char'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+  Adventure_of_Wizard.vcxproj -> E:\프로젝트\C 프로젝트 RPG 게임\Adventure_of_Wizard\x64\Debug\Adventure_of_Wizard.exe
