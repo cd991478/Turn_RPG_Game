@@ -673,7 +673,7 @@ void firepunch_eft() // 컴퓨터 스킬 화염주먹강타 스킬
         delay(50);
         move_set();
     }
-    back_eft();
+    back_eft(); // 컴퓨터 캐릭터가 뒤로 되돌아감
     eft_set();
 }
 ```
